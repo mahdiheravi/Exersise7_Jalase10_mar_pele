@@ -19,19 +19,28 @@ public class MainActivity extends AppCompatActivity {
         LL = new LinearLayout[11];
         btn = new Button[101];
 
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
 
         LinearLayout parentLayout = (LinearLayout) findViewById(R.id.LL);
-        int k;
+
+        int k = 1;
         for (int i = 1; i <= 10; i++) {
             LL[i] = new LinearLayout(this);
             LL[i].setOrientation(LinearLayout.HORIZONTAL);
-            LL[i].setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT));
+           // layoutParams.weight = 10;
+            // LL[i].setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT));
+            LL[i].setLayoutParams(layoutParams);
+
             parentLayout.addView(LL[i]);
             for (int j = 1; j <= 10; j++) {
-                k = i * j;
+
                 btn[k] = new Button(this);
-                btn[k].setText("btn");
+                btn[k].setText(String.valueOf(k));
+              //  layoutParams.weight=1;
+                btn[k].setLayoutParams(layoutParams);
+
                 LL[i].addView(btn[k]);
+                k++;
             }
         }
 
