@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         btn = new Button[101];
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-
+        layoutParams.weight=1;
         LinearLayout parentLayout = (LinearLayout) findViewById(R.id.LL);
 
         int k = 1;
@@ -29,15 +29,15 @@ public class MainActivity extends AppCompatActivity {
             LL[i].setOrientation(LinearLayout.HORIZONTAL);
            // layoutParams.weight = 10;
             // LL[i].setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT));
-            LL[i].setLayoutParams(layoutParams);
+           // LL[i].setLayoutParams(layoutParams);
 
             parentLayout.addView(LL[i]);
             for (int j = 1; j <= 10; j++) {
 
                 btn[k] = new Button(this);
                 btn[k].setText(String.valueOf(k));
-              //  layoutParams.weight=1;
                 btn[k].setLayoutParams(layoutParams);
+                btn[k].setPadding(0,0,0,0);
 
                 LL[i].addView(btn[k]);
                 k++;
