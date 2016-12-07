@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     LinearLayout[] LL;
     Button[] btn;
+    int iteration;
     int counter, direction, random_number, old_counter;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int k = 101;
         counter = 0;
         direction = 1;
+        iteration = 0;
         for (int i = 1; i <= 10; i++) {
             LL[i] = new LinearLayout(this);
             LL[i].setOrientation(LinearLayout.HORIZONTAL);
@@ -74,19 +76,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         InitilizeMAR();
 
-        Button btntas = (Button) findViewById(R.id.btntas);
+        final Button btntas = (Button) findViewById(R.id.btntas);
         btntas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                iteration++;
                 Random rnd = new Random();
                 random_number = rnd.nextInt(6) + 1;//create Random number Between 1 - 6;
                 TVshow.setText(String.valueOf(random_number));
                 old_counter = counter;
-                counter += random_number;
-                btn[counter].setBackgroundColor(Color.BLUE);
-                if (old_counter != 0)
-                    btn[old_counter].setBackgroundColor(Color.rgb(208, 173, 136));
+                if (counter+random_number>100)
+                    Toast.makeText(MainActivity.this, "Try again for smaller Number", Toast.LENGTH_SHORT).show();
+                else {
+                    counter += random_number;
+                    counter = IsMAR(counter);
+                    
+                    btn[counter].setBackgroundColor(Color.BLUE);
 
+                    if (old_counter != 0)
+                        btn[old_counter].setBackgroundColor(Color.rgb(208, 173, 136));
+                    if (counter== 100)
+                    {
+                        Toast.makeText(MainActivity.this, "YOU WIN BY "+String.valueOf(iteration)+" Iteration", Toast.LENGTH_SHORT).show();
+                        btntas.setEnabled(false);
+
+
+                    }
+                }
 
             }
         });
@@ -98,27 +114,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void InitilizeMAR() {
         btn[35].setBackgroundColor(Color.RED);
-
-
         btn[78].setBackgroundColor(Color.RED);
-
         btn[90].setBackgroundColor(Color.RED);
         btn[45].setBackgroundColor(Color.RED);
-
     }
 
     private int IsMAR(int num) {
+        int new_num=-1;
         switch (num) {
             case 35:
-                return 12;
+                new_num = 12;
+                break;
+               
             case 78:
-                return 5;
+                new_num = 12;
+                break;
             case 90:
-                return 6;
+                new_num = 12;
+                break;
             case 45:
-                return 19;
-
-
+                new_num = 12;
+                break;
+        }
+        if (new_num!=-1)
+        {
+            Toast.makeText(MainActivity.this, "Snakebite By "+ String.valueOf(num), Toast.LENGTH_SHORT).show();
+            return  new_num;
         }
         return num;
     }
